@@ -12,6 +12,13 @@ Remote assignment for Globema.
 ## Benchmarks were run on the following machine:
 - Apple MacBook Pro (16-inch, M2 max, 2023), 64GB RAM, 2TB SSD
 
+## Before running the benchmarks:
+- `pip install pytest-benchmark`
+
+## How to run the benchmarks:
+- New solution: `py.test benchmark_test.py`
+- Old solution: `py.test old_solution_benchmark_test.py`
+
  # OLD SOLUTION
 
 | Name (time in s)                      | Min            | Max            | Mean           | StdDev         | Median         | IQR            | Outliers | OPS           | Rounds | Iterations |
