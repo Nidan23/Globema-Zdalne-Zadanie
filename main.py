@@ -5,7 +5,7 @@ empty_string = ''
 
 # Prime numbers drawing from the range (123 456 789) and using the Eratosthenes sieve
 def get_prime_numbers_up_to_n(n):
-    prime = [True for _ in range(n+1)]
+    prime = [True] * (n+1)
     p = 2
 
     while p * p <= n:
@@ -14,7 +14,7 @@ def get_prime_numbers_up_to_n(n):
                 prime[i] = False
         p += 1
 
-    primes = [p for p in range(2, n) if prime[p]]
+    primes = [2] + [p for p in range(3, n, 2) if prime[p]]
 
     return primes
 
@@ -35,9 +35,7 @@ def find_most_common_similar_prime_number_group(data):
     return biggest_group
 
 
-if __name__ == '__main__':
-    n = 123456789
-
+def run(n):
     prime_numbers = get_prime_numbers_up_to_n(n)
     most_common_group = find_most_common_similar_prime_number_group(prime_numbers)
 
@@ -45,3 +43,9 @@ if __name__ == '__main__':
     number_group_count = most_common_group[1]
 
     print(f'The biggest group is: {number_group} - {number_group_count} elements')
+
+    return number_group, number_group_count
+
+
+if __name__ == '__main__':
+    run(123456789)
