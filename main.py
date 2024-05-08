@@ -1,20 +1,22 @@
 from collections import Counter
 
-def SieveOfEratosthenes(n): # Tworzenie liczb z zakresu (123 456 789) i użycie sita Eratostelesa
-     
-    prime = [True for i in range(n + 1)]
+
+# Prime numbers drawing from the range (123 456 789) and using the Eratosthenes sieve
+def SieveOfEratosthenes(n):
+    prime = [True for _ in range(n + 1)]
     data = []
     p = 2
-    while (p * p <= n):
-         
-        if (prime[p] == True):
-             
+
+    while p * p <= n:
+
+        if prime[p]:
+
             for i in range(p ** 2, n + 1, p):
                 prime[i] = False
         p += 1
 
-    prime[0]= False
-    prime[1]= False
+    prime[0] = False
+    prime[1] = False
 
     for p in range(n + 1):
         if prime[p]:
@@ -22,28 +24,29 @@ def SieveOfEratosthenes(n): # Tworzenie liczb z zakresu (123 456 789) i użycie 
 
     return data
 
-def FindGroups(data): # Szukanie grup liczb pierwszysch podobnych
 
+# Searching for the similar prime number groups
+def FindGroups(data):
     for i in range(len(data)):
-        temporaryData = []
+        temporary_data = []
         for chars in data[i]:
-            temporaryData.append(chars)
+            temporary_data.append(chars)
 
-        temporaryData = sorted(temporaryData)   # Sortowanie tymczasowej tablicy znaków
+        temporary_data = sorted(temporary_data)
 
-        data[i] = ''    # Usuwanie poprzedniej wartości
+        data[i] = ''
 
-        for x in temporaryData:
-            data[i] = data[i] + x   # Przypisywanie nowej wartości
+        for x in temporary_data:
+            data[i] = data[i] + x
 
-    res = Counter(data)     # Zliczanie duplikatów - ilość liczb z danej grupy
+    res = Counter(data)
 
-    res = sorted(res.items(), key =
-             lambda kv:(kv[1], kv[0]))      # Sortowanie
+    res = sorted(res.items(), key=lambda kv: (kv[1], kv[0]))
 
-    print(f'Największa grupa to: {res[-1][0]} - {res[-1][1]} wystąpień')
+    print(f'The biggest group is: {res[-1][0]} - {res[-1][1]} elements')
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     n = 123456789
 
     FindGroups(SieveOfEratosthenes(n))
