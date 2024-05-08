@@ -2,6 +2,12 @@
 
 Remote assignment for Globema.
 
+# Requirements:
+ - Find similar prime numbers in a given range
+
+# Description:
+ Similar prime number is a number that has the same digits as another prime number. For example, 113 and 131 are similar prime numbers. The task is to find all similar prime numbers in a given range.
+
 
 ## Benchmarks were run on the following machine:
 - Apple MacBook Pro (16-inch, M2 max, 2023), 64GB RAM, 2TB SSD
