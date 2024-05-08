@@ -1,52 +1,47 @@
 from collections import Counter
 
+empty_string = ''
+
 
 # Prime numbers drawing from the range (123 456 789) and using the Eratosthenes sieve
-def SieveOfEratosthenes(n):
-    prime = [True for _ in range(n + 1)]
-    data = []
+def get_prime_numbers_up_to_n(n):
+    prime = [True for _ in range(n+1)]
     p = 2
 
     while p * p <= n:
-
         if prime[p]:
-
-            for i in range(p ** 2, n + 1, p):
+            for i in range(p * p, n+1, p):
                 prime[i] = False
         p += 1
 
-    prime[0] = False
-    prime[1] = False
+    primes = [p for p in range(2, n) if prime[p]]
 
-    for p in range(n + 1):
-        if prime[p]:
-            data.append(str(p))
-
-    return data
+    return primes
 
 
 # Searching for the similar prime number groups
-def FindGroups(data):
-    for i in range(len(data)):
-        temporary_data = []
-        for chars in data[i]:
-            temporary_data.append(chars)
+def find_most_common_similar_prime_number_group(data):
+    size = len(data)
 
-        temporary_data = sorted(temporary_data)
+    for i in range(size):
+        data_as_string = str(data[i])
+        sorted_data = sorted(data_as_string)
+        data[i] = empty_string.join(sorted_data)
 
-        data[i] = ''
+    counter = Counter(data)
 
-        for x in temporary_data:
-            data[i] = data[i] + x
+    biggest_group = counter.most_common()[0]
 
-    res = Counter(data)
-
-    res = sorted(res.items(), key=lambda kv: (kv[1], kv[0]))
-
-    print(f'The biggest group is: {res[-1][0]} - {res[-1][1]} elements')
+    return biggest_group
 
 
 if __name__ == '__main__':
     n = 123456789
 
-    FindGroups(SieveOfEratosthenes(n))
+    prime_numbers = get_prime_numbers_up_to_n(n)
+    most_common_group = find_most_common_similar_prime_number_group(prime_numbers)
+
+    number_group = most_common_group[0]
+    number_group_count = most_common_group[1]
+
+    print(f'The biggest group is: {number_group} - {number_group_count} elements')
